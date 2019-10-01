@@ -71,7 +71,7 @@ def bwa_map_pe(title, refgenome, read1, read2, subject):
         '_sort_dedup.bam.bai',
         '_sort_dedup.bam.flagstat']]
 
-    options = {'cores': 16, 'memory': 12000, 'walltime': '24:00:00'} # changed memory to 16, # back to 12, and with double time (24h)
+    options = {'cores': 16, 'memory': 16000, 'walltime': '24:00:00'} # changed memory to 16, # back to 12, and with double time (24h)
     spec = '''
         source /com/extra/bwa/0.7.5a/load.sh
         source /com/extra/sambamba/0.5.1/load.sh
