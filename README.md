@@ -7,10 +7,12 @@ We want to describe the copy number variation of the genes in the Chimpanzee (Pa
 By constructing dot-plots of the PanTro3 reference X chromosome in windows of ??Mbp, we surveilled the chromosome for genes containing internal duplications.
 
 ?? Fig1, arbitrary dotplot
+![what](https://github.com/cmkobel/ChimpX/blob/master/01dotplot/1plots/window_1.png "example dotplot")
+
 
 Next thing was to extract all the genes with internal duplications and concatenate them into an *Artificial Chromosome*.
 
-We sourced the web for public Chimpanzee (Pan Troglodytes) genomes (all subspecies). We collected 38 such genomes. (See `all_38.tsv`for info).
+We sourced the web for public Chimpanzee (Pan Troglodytes) genomes (all subspecies). We collected 38 such genomes. (See `subjects/subjects.tsv` for furter information).
 
 Then we mapped the reads from 38 subjects (Chimpanzees) onto the artificial chromosome. By reading off the coverage in each position along each concatenated gene in the artificial chromosome, we were able to describe the relative copy number variation in each subject. We decided that the *DMD* gene is a single copy gene. This means that by dividing the coverage for each gene by the coverage for *DMD* in each subject, we can approximate an absolute copy number for each subject. This data is visualized in the following figure:
 
