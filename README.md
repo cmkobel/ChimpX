@@ -26,3 +26,5 @@ After this initial assessment, we decided to go ahead and look for variation in 
 
 Fig3, artificial chromosome internal structure
 ![2](https://github.com/cmkobel/ChimpX/blob/master/visualization/ac3_dotplot_no69_debug.pdf "artificial chromosome internal structure")
+
+## Phase 2 - including all genes in the X chromosome
