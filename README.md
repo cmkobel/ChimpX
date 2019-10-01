@@ -7,6 +7,8 @@ We want to describe the copy number variation of the genes in the Chimpanzee (Pa
 By constructing dot-plots of the PanTro3 reference X chromosome in windows of ??Mbp, we surveilled the chromosome for genes containing internal duplications.
 
 ?? Fig1, arbitrary dotplot
+![what](https://github.com/cmkobel/ChimpX/blob/master/01dotplot/1plots/window_1.png "example dotplot")
+
 
 Next thing was to extract all the genes with internal duplications and concatenate them into an *Artificial Chromosome*.
 
