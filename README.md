@@ -20,7 +20,7 @@ Fig2, data phase 1
 ![2](https://github.com/cmkobel/ChimpX/blob/master/visualization/chimpx_region_points.png "variation in selected genes")
 
 
-The x axis represents each gene, and the y-axis represents the Copy Number. Each dot is a subject. Colored by sex.
+The y-axis represents the Copy Number. The x-axis represents each gene sorted by descending copy number variance.  Each dot is a subject. Colored by sex.
 
 After this initial assessment, we decided to go ahead and look for variation in all ~1000 genes in the X chromosome. One caveat of using the aforementioned dotplot-method, is that it is only possibly to recognize duplications of content within the dotplot window. A quick investigation in the structure of the artificial chromosome highligths many repetitions of sequences which are distantly positioned and unlinked to the gene. This quick investigation is visualized in the following figure:
 
