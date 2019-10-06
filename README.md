@@ -28,6 +28,11 @@ Fig3, artificial chromosome internal structure
 ![2](https://github.com/cmkobel/ChimpX/blob/master/visualization/ac3_dotplot_no69_debug.pdf "artificial chromosome internal structure")
 
 ## Phase 2 - Including all genes in the X chromosome
+Let's see what the standard deviation of coverage is along the chromosome:
+
+Fig4, coverage across Chimpanzee X-chromosomme
+![what](https://github.com/cmkobel/ChimpX/blob/master/visualization/sd_across_30.png?raw=true "example dotplot")
+
 
 
 ## Phase 3 - Relating to meiotic drive?
