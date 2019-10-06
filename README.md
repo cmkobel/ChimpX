@@ -30,9 +30,9 @@ Fig3, artificial chromosome internal structure
 ## Phase 2 - Including all genes in the X chromosome
 Let's see what the standard deviation of coverage is along the chromosome:
 
-Fig4, coverage across Chimpanzee X-chromosomme
-![what](https://github.com/cmkobel/ChimpX/blob/master/visualization/sd_across_30.png?raw=true "example dotplot")
 
+![what](https://github.com/cmkobel/ChimpX/blob/master/visualization/sd_across_30.png?raw=true "standard deviaton of coverage across the Chimpanzee X-chromosome")
+*Fig 4: standard deviaton of coverage across the Chimpanzee X-chromosome*
 
 
 ## Phase 3 - Relating to meiotic drive?
