@@ -16,7 +16,7 @@ We sourced the web for public Chimpanzee (Pan Troglodytes) genomes (all subspeci
 Then we mapped the reads from 38 subjects (Chimpanzees) onto the artificial chromosome. By reading off the coverage in each position along each concatenated gene in the artificial chromosome, we were able to describe the relative copy number variation in each subject. We decided that the *DMD* gene is a single copy gene. This means that by dividing the coverage for each gene by the coverage for *DMD* in each subject, we can approximate an absolute copy number for each subject. This data is visualized in the following figure:
 
 ![2](https://github.com/cmkobel/ChimpX/blob/master/visualization/chimpx_region_points.png "variation in selected genes")
-*Fig 2: Copy number variation for selected genes, 34 individuals.*
+*Fig 2: Copy number variation for selected genes on the X-chromosome, 34 individuals.*
 
 The y-axis represents the Copy Number. The x-axis represents each gene sorted by descending copy number variance.  Each dot is a subject. Colored by sex.
 
@@ -31,6 +31,11 @@ Let's see what the standard deviation of coverage is after filtering along the c
 
 ![what](https://github.com/cmkobel/ChimpX/blob/master/visualization/sd_across_30.png?raw=true "standard deviaton of coverage across the Chimpanzee X-chromosome")
 *Fig 4: standard deviaton of coverage across the Chimpanzee X-chromosome*
+
+We have all (most) of the individuals to the complete X-chromosome. Now, we are going to isolate the copy numbers for all individuals in the regions where the .GFF-file defines a named gene.
+
+*Fig 5: Copy number variation for all genes on the X-chromosome, 30 individuals. Only n genes with the highest spread are included in the figure.*
+
 
 
 ## Phase 3 - Relating to meiotic drive?
