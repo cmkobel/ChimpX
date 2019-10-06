@@ -34,6 +34,7 @@ Let's see what the standard deviation of coverage is after filtering along the c
 
 We have all (most) of the individuals to the complete X-chromosome. Now, we are going to isolate the copy numbers for all individuals in the regions where the .GFF-file defines a named gene.
 
+![what](https://raw.githubusercontent.com/cmkobel/ChimpX/master/visualization/phase2_main.png "100 genes with the highest CN spread") 
 *Fig 5: Copy number variation for all genes on the X-chromosome, 30 individuals. Only n genes with the highest spread are included in the figure.*
 
 
