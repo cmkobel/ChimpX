@@ -28,7 +28,7 @@ Fig3, artificial chromosome internal structure
 ![2](https://github.com/cmkobel/ChimpX/blob/master/visualization/ac3_dotplot_no69_debug.pdf "artificial chromosome internal structure")
 
 ## Phase 2 - Including all genes in the X chromosome
-Let's see what the standard deviation of coverage is along the chromosome:
+Let's see what the standard deviation of coverage is after filtering along the chromosome:
 
 
 ![what](https://github.com/cmkobel/ChimpX/blob/master/visualization/sd_across_30.png?raw=true "standard deviaton of coverage across the Chimpanzee X-chromosome")
