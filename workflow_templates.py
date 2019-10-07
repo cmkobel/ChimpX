@@ -158,7 +158,7 @@ def filter_bam_file(title, individual):
     inputs = [title+'/'+individual+'/'+individual+'_merged.bam'] # er det nødvendigt at kalde den individual to gange?
     outputs = [title+'/'+individual+'/'+individual+'_filtered.bam',
                title+'/'+individual+'/'+individual+'_filtered.bam.bai']
-    options = {'cores': 1, 'memory': 8000, 'walltime': '02:00:00'}
+    options = {'cores': 1, 'memory': 8000, 'walltime': '10:00:00'} # 2 timer er nok til 80% af chimp38
     spec = '''
         cd {title}
         source /com/extra/sambamba/0.5.1/load.sh
