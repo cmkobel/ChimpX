@@ -20,22 +20,17 @@ Then we mapped the reads from 38 subjects (Chimpanzees) onto the artificial chro
 
 The y-axis represents the Copy Number. The x-axis represents each gene sorted by descending copy number variance.  Each dot is a subject. Colored by sex.
 
-After this initial assessment, we decided to go ahead and look for variation in all ~1000 genes in the X chromosome. One caveat of using the aforementioned dotplot-method, is that it is only possibly to recognize duplications of content within the dotplot window. A quick investigation in the structure of the artificial chromosome highligths many repetitions of sequences which are distantly positioned and unlinked to the gene. This quick investigation is visualized in the following figure:
+## Phase 2 - Including all genes in the X chromosome
+
+After this initial assessment, we decided to go ahead and look for variation in all ~1000 genes in the X chromosome. One caveat of using the aforementioned dotplot-method, is that it is only possible to recognize duplications of content within the dotplot window. A quick investigation in the structure of the artificial chromosome highligths many repetitions of sequences which are distantly positioned and unlinked to the gene. This quick investigation is visualized in the following figure:
 
 ![2](https://github.com/cmkobel/ChimpX/blob/master/visualization/ac3_dotplot_no69_debug.pdf "artificial chromosome internal structure")
 *Fig3: Dotplot of the artificial chromosome against itself. Shows internal identities*
 
-## Phase 2 - Including all genes in the X chromosome
-Let's see what the standard deviation of coverage is after filtering along the chromosome:
-
-
-![what](https://github.com/cmkobel/ChimpX/blob/master/visualization/sd_across_30.png?raw=true "standard deviaton of coverage across the Chimpanzee X-chromosome")
-*Fig 4: standard deviaton of coverage across the Chimpanzee X-chromosome*
-
-We have all (most) of the individuals to the complete X-chromosome. Now, we are going to isolate the copy numbers for all individuals in the regions where the .GFF-file defines a named gene.
+Most of the individuals have been mapped to the complete X-chromosome.
 
 ![what](https://raw.githubusercontent.com/cmkobel/ChimpX/master/visualization/phase2_main.png "100 genes with the highest CN spread") 
-*Fig 5: Copy number variation for all genes on the X-chromosome, 30 individuals. Only n genes with the highest spread are included in the figure.*
+*Fig 5: Copy number variation for all genes on the X-chromosome, 30 individuals. Only 100 genes with the highest spread are included in the figure. The normalization gene (dystrophin) in included in the far right.*
 
 
 
