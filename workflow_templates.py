@@ -28,7 +28,7 @@ def index_genome(title, refgenome):
     
     inputs = [refgenome]
     outputs = [title+'/'+refgenome_stem+extension for extension in ['.amb', '.ann', '.pac', '.sa', '.bwt', '.fa']]
-    options = {'cores': 1, 'memory': 2000, 'walltime': '00:25:00'}
+    options = {'cores': 1, 'memory': 2000, 'walltime': '00:25:00', 'account': "simons"}
     #options = {}
     spec =  """sleep 1; cd {title}; cp ../{refgenome} .; source /com/extra/bwa/0.7.5a/load.sh; bwa index -p {refgenome_stem} -a bwtsw {refgenome}""".format(title=title, refgenome_stem=refgenome_stem, refgenome=refgenome)
     #spec =  """mkdir {title}; cd {title}; touch test; """.format(title=title)
@@ -71,7 +71,7 @@ def bwa_map_pe(title, refgenome, read1, read2, subject):
         '_sort_dedup.bam.bai',
         '_sort_dedup.bam.flagstat']]
 
-    options = {'cores': 16, 'memory': 16000, 'walltime': '24:00:00'} # changed memory to 16, # back to 12, and with double time (24h)
+    options = {'cores': 16, 'memory': 16000, 'walltime': '24:00:00', 'account': "simons"} # changed memory to 16, # back to 12, and with double time (24h)
     spec = '''
         source /com/extra/bwa/0.7.5a/load.sh
         source /com/extra/sambamba/0.5.1/load.sh
@@ -108,7 +108,7 @@ def merge_bams_new(title, subject, infiles, outfile, input):
     inputs = [title+'/'+i for i in infiles]
     outputs = [title+'/'+subject+'/'+outfile] # must be a list
     if len(inputs) > 1:
-        options = {'cores': 4, 'memory': 8000, 'walltime': '02:45:00'}
+        options = {'cores': 4, 'memory': 8000, 'walltime': '02:45:00', 'account': "simons"}
         spec = '''
             source /com/extra/sambamba/0.5.1/load.sh
             cd {title}
@@ -126,7 +126,7 @@ def merge_bams_new(title, subject, infiles, outfile, input):
                 inbams = ' '.join(infiles),
                 subject = subject)
     else:
-        options = {'cores': 1, 'memory': 1000, 'walltime': '00:10:00'}
+        options = {'cores': 1, 'memory': 1000, 'walltime': '00:10:00', 'account': "simons"}
         spec = '''
             source /com/extra/sambamba/0.5.1/load.sh
             cd {title}
@@ -158,7 +158,7 @@ def filter_bam_file(title, individual):
     inputs = [title+'/'+individual+'/'+individual+'_merged.bam'] # er det nødvendigt at kalde den individual to gange?
     outputs = [title+'/'+individual+'/'+individual+'_filtered.bam',
                title+'/'+individual+'/'+individual+'_filtered.bam.bai']
-    options = {'cores': 1, 'memory': 8000, 'walltime': '10:00:00'} # 2 timer er nok til 80% af chimp38
+    options = {'cores': 1, 'memory': 8000, 'walltime': '10:00:00', 'account': "simons"} # 2 timer er nok til 80% af chimp38
     spec = '''
         cd {title}
         source /com/extra/sambamba/0.5.1/load.sh
@@ -177,7 +177,7 @@ def get_coverage(title, individual):
     """
     inputs = [title+'/'+individual+'/'+individual+'_filtered.bam']
     outputs = [title+'/'+individual+'/'+individual+'_cov.txt']
-    options = {'cores': 4, 'memory': 4000, 'walltime': '04:00:00'}
+    options = {'cores': 4, 'memory': 4000, 'walltime': '04:00:00', 'account': "simons"}
     spec = '''
         cd {title}
         source /com/extra/sambamba/0.5.1/load.sh
@@ -193,7 +193,7 @@ def get_cnv(title, individual, chrom):
     inputs = [title+'/'+individual+'/'+individual+'_cov.txt']
     #ooutputs = [inputs[0]+'_pd_median.txt']
     outputs = [title+'/cn_medians/'+chrom+'_'+individual+'_cn_median.csv']
-    options = {'cores': 4, 'memory': 64000, 'walltime': '04:00:00'}
+    options = {'cores': 4, 'memory': 64000, 'walltime': '04:00:00', 'account': "simons"}
     spec = '''
     if [ ! -d {dir} ]; then mkdir {dir}; fi
     ~/miniconda3/bin/python compute_cov_median.py {input} {output}
