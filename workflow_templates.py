@@ -30,7 +30,10 @@ def index_genome(title, refgenome):
     outputs = [title+'/'+refgenome_stem+extension for extension in ['.amb', '.ann', '.pac', '.sa', '.bwt', '.fa']]
     options = {'cores': 1, 'memory': 2000, 'walltime': '00:25:00', 'account': "simons"}
     #options = {}
-    spec =  """sleep 1; cd {title}; cp ../{refgenome} .; source /com/extra/bwa/0.7.5a/load.sh; bwa index -p {refgenome_stem} -a bwtsw {refgenome}""".format(title=title, refgenome_stem=refgenome_stem, refgenome=refgenome)
+    spec =  """sleep 1; cd {title}; cp ../{refgenome} .
+
+#source /com/extra/bwa/0.7.5a/load.sh
+bwa index -p {refgenome_stem} -a bwtsw {refgenome}""".format(title=title, refgenome_stem=refgenome_stem, refgenome=refgenome)
     #spec =  """mkdir {title}; cd {title}; touch test; """.format(title=title)
 
     return inputs, outputs, options, spec
@@ -73,7 +76,7 @@ def bwa_map_pe(title, refgenome, read1, read2, subject):
 
     options = {'cores': 16, 'memory': 16000, 'walltime': '24:00:00', 'account': "simons"} # changed memory to 16, # back to 12, and with double time (24h)
     spec = '''
-        source /com/extra/bwa/0.7.5a/load.sh
+        #source /com/extra/bwa/0.7.5a/load.sh
         #source /com/extra/sambamba/0.5.1/load.sh
         cd {title}
         echo hvade
@@ -162,7 +165,7 @@ def filter_bam_file(title, individual):
     spec = '''
         cd {title}
         #source /com/extra/sambamba/0.5.1/load.sh
-        sambamba view -F "not (duplicate or secondary_alignment or unmapped) and mapping_quality >= 50 and cigar =~ /100M/ and [NM] < 3" -f bam ./{ind}/{ind}_merged.bam > ./{ind}/{ind}_filtered.bam
+        sambamba view -F "not (duplicate or secondary_alignment or unmapped) and mapping_quality >= 50 and cigar =~ /100M/ and [NM] < 3" -f bam {ind}/{ind}_merged.bam > {ind}/{ind}_filtered.bam
         sambamba index ./{ind}/{ind}_filtered.bam 
         #rm -f {ind}_merged.bam'''.format(title=title, ind=individual)
     #print(spec)
@@ -181,7 +184,7 @@ def get_coverage(title, individual):
     spec = '''
         cd {title}
         #source /com/extra/sambamba/0.5.1/load.sh
-        source /com/extra/samtools/1.3/load.sh
+        #source /com/extra/samtools/1.3/load.sh
         cd {ind}
 
         samtools depth {ind}_filtered.bam > {ind}_cov.txt
