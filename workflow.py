@@ -170,8 +170,8 @@ for _row, row in subjects.iterrows(): # for each subject
                                           subject))
 
     # 6: Calculate CNV
-    gwf.target_from_template(batch['prefix'] + '_6_calc_cnv' + subject.replace('-', '_'), get_cnv(batch['prefix'],
-                                                                                                  subject,
-                                                                                                  'X'))
+    #gwf.target_from_template(batch['prefix'] + '_6_calc_cnv' + subject.replace('-', '_'), get_cnv(batch['prefix'],
+    #                                                                                              subject,
+    #                                                                                              'X'))
     #break # debug for only first subject (Carolina)
 

@@ -74,7 +74,7 @@ def bwa_map_pe(title, refgenome, read1, read2, subject):
     options = {'cores': 16, 'memory': 16000, 'walltime': '24:00:00', 'account': "simons"} # changed memory to 16, # back to 12, and with double time (24h)
     spec = '''
         source /com/extra/bwa/0.7.5a/load.sh
-        source /com/extra/sambamba/0.5.1/load.sh
+        #source /com/extra/sambamba/0.5.1/load.sh
         cd {title}
         echo hvade
         bwa mem -M -t 16 -a {refgenome_stem} {R1} {R2} \
@@ -110,7 +110,7 @@ def merge_bams_new(title, subject, infiles, outfile, input):
     if len(inputs) > 1:
         options = {'cores': 4, 'memory': 8000, 'walltime': '02:45:00', 'account': "simons"}
         spec = '''
-            source /com/extra/sambamba/0.5.1/load.sh
+            #source /com/extra/sambamba/0.5.1/load.sh
             cd {title}
 
             mkdir -p {subject}
@@ -128,7 +128,7 @@ def merge_bams_new(title, subject, infiles, outfile, input):
     else:
         options = {'cores': 1, 'memory': 1000, 'walltime': '00:10:00', 'account': "simons"}
         spec = '''
-            source /com/extra/sambamba/0.5.1/load.sh
+            #source /com/extra/sambamba/0.5.1/load.sh
             cd {title}
 
             mkdir -p {subject}
@@ -161,7 +161,7 @@ def filter_bam_file(title, individual):
     options = {'cores': 1, 'memory': 8000, 'walltime': '10:00:00', 'account': "simons"} # 2 timer er nok til 80% af chimp38
     spec = '''
         cd {title}
-        source /com/extra/sambamba/0.5.1/load.sh
+        #source /com/extra/sambamba/0.5.1/load.sh
         sambamba view -F "not (duplicate or secondary_alignment or unmapped) and mapping_quality >= 50 and cigar =~ /100M/ and [NM] < 3" -f bam ./{ind}/{ind}_merged.bam > ./{ind}/{ind}_filtered.bam
         sambamba index ./{ind}/{ind}_filtered.bam 
         #rm -f {ind}_merged.bam'''.format(title=title, ind=individual)
@@ -180,16 +180,22 @@ def get_coverage(title, individual):
     options = {'cores': 4, 'memory': 4000, 'walltime': '04:00:00', 'account': "simons"}
     spec = '''
         cd {title}
-        source /com/extra/sambamba/0.5.1/load.sh
+        #source /com/extra/sambamba/0.5.1/load.sh
         source /com/extra/samtools/1.3/load.sh
         cd {ind}
 
-        samtools depth {ind}_filtered.bam > {ind}_cov.txt'''.format(title=title, ind=individual)
+        samtools depth {ind}_filtered.bam > {ind}_cov.txt
+        mail -s "chimpx done {ind}" kobel@pm.me <<< "$(du -h {ind}_cov.txt)"
+        '''.format(title=title, ind=individual)
+        
+
     return inputs, outputs, options, spec
 
 
 # 6:
 def get_cnv(title, individual, chrom):
+    pass
+    """
     inputs = [title+'/'+individual+'/'+individual+'_cov.txt']
     #ooutputs = [inputs[0]+'_pd_median.txt']
     outputs = [title+'/cn_medians/'+chrom+'_'+individual+'_cn_median.csv']
@@ -199,4 +205,4 @@ def get_cnv(title, individual, chrom):
     ~/miniconda3/bin/python compute_cov_median.py {input} {output}
     '''.format(dir = title+'/cn_medians/', input = inputs[0], output = outputs[0])
     return inputs, outputs, options, spec
-    #fejl ved manglende fil? fordi den ligge en aterproccessing.
+    #fejl ved manglende fil? fordi den ligge en aterproccessing."""
