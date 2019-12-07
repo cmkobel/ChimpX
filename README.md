@@ -31,7 +31,7 @@ After this initial assessment, we decided to go ahead and look for variation in 
 
 Most of the individuals have been mapped to the complete X-chromosome. Coverage of each gene has been normalized with the dystrophin gene of the same individual.
 
-![f4](https://raw.githubusercontent.com/cmkobel/ChimpX/master/visualization/phase2_main.png "100 genes with the highest CN spread") 
+![f4](https://raw.githubusercontent.com/cmkobel/ChimpX/master/visualization/phase2_main_new.png "100 genes with the highest CN spread") 
 *Fig 4: Copy number variation for all genes on the X-chromosome, 30 individuals. Only 100 genes with the highest spread are included in the figure. The normalization gene (dystrophin) in included in the far right.*
 
 
