@@ -76,6 +76,7 @@ genes = annotation %>%
            long_name = str_sub(attributes, 9, 26)) %>%
     mutate(description = substring(str_extract(attributes, regex("description=[^\\[]+")), 13)) %>% 
     
+    
     mutate(name = if_else(is.na(short_name), long_name, short_name)) %>% 
     mutate(length = abs(start - end))
     select(-short_name)
@@ -97,20 +98,19 @@ position_and_names = coverage_data[,] %>% select(position) %>%
 
 
 
-
+# Her samler jeg annotering og coverage data
 full = left_join(position_and_names, coverage_data) %>% select(-position, -present_gene) %>%  group_by(present_gene_name) %>% 
     summarise_all(list(med = median), na.rm = T)
 # Hvornår skal der egentlig normaliseres?
 
 
 # Nu skal full transponeres, således at hver kolonne er et gen
-
 # transpose
 full_t = full %>%
     gather(key = subject, value = value, 2:ncol(full)) %>% 
     spread(key = names(full)[1], value = 'value')
 
-# normalize
+# normalize ift. DMD som i pantro3 kaldes ENSPTRG...44033
 full_t_norm = full_t %>%  mutate_at(
     vars(-subject), funs(. / full_t$ENSPTRG00000044033)
 )
@@ -130,6 +130,7 @@ metadata = read_delim("~/bioinformatics/chimpx/all_38.tsv",
 metadata$subject = metadata$subject %>% recode(Julie_A959 = "Julie-A959",
                                                Julie_LWC21 = "Julie-LWC21")
 
+# add metadata to full_t_norm
 complete = left_join(full_t_norm, metadata) # Has genes as columns
 
 
@@ -141,8 +142,8 @@ complete_gathered = complete %>%
 
 
 # This is the final data, which should be sufficient for all plotting.
-saveRDS(complete_gathered, "checkpoint_4_complete_gathered.rds")
-complete_gathered = readRDS("checkpoint_4_complete_gathered.rds")
+#saveRDS(complete_gathered, "checkpoint_4_complete_gathered.rds")
+#complete_gathered = readRDS("checkpoint_4_complete_gathered.rds")
 
 
 # this sorted list is used for arranging the genes in the plot in a descending manner.
@@ -152,12 +153,14 @@ sorted = complete_gathered %>% group_by(gene_name, description, length) %>%
     select(gene_name, median, length, sd, ratio, description)
 
 
-sorted %>% ggplot(aes(length, sd)) + geom_point() # mere data på længere gener
-sorted %>% ggplot(aes(median, sd)) + geom_point() # mere varians på mere kopierede gener
-
-
 # to do: add gene lenghs hre
 write_tsv(sorted, "sorted.tsv")
+
+sorted %>% ggplot(aes(sd, median, color = length)) + geom_point() # mere varians på mere kopierede gener
+sorted %>% ggplot(aes(length, 1/sd)) + geom_point() # mere data på længere gener
+sorted %>% ggplot(aes(median, length)) + geom_point() # mere varians på mere kopierede gener
+
+
 
 
 # histogram of sd
