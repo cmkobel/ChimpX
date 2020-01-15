@@ -3,23 +3,28 @@
 
 
 \subsection*{Overall distribution}
-The overall distribution of copy numbers, across all genes and individuals, is shown in figure \ref{fig:qc_dist_all}. The distribution is near symmetrical, centered around a mean of 1.
+Normalizing the coverage of each gene with the coverage of the DMD gene, renders the overall distribution of copy numbers, across all genes and individuals, as shown in figure \ref{fig:qc_dist_all}. 
 
 % Figure 1
 \begin{figure}[h] 
   \centering
-  \includegraphics[width=0.58\textwidth]{figures/fig_qc_dist_all_1.pdf}
+  %\includegraphics[width=0.58\textwidth]{figures/fig_qc_dist_all_1.pdf}
+  \includegraphics[scale=0.78]{figures/fig_overall_1and3.pdf}
   
-  \caption{Distribution of median CN across all genes for all subjects not including Simliki. A normal distribution with an equal mean, SD and area (grey) is overlapped as a visual aid. Colored by sex.}
+  \caption{Distribution of median CN across all genes for all subjects. A normal distribution with an equal median, SD and area (grey) is overlapped as a visual aid. Colored by sexes which are stacked. \textbf{A}: Normalization is achieved through the coverage of the DMD gene. \textbf{B}: Normalization is achieved through shifting the distribution of each individual.}
   
   \label{fig:qc_dist_all}
 \end{figure}
 
-\noindent There is no known prior on the chromosome wide CN distribution. But a mean close to one makes good sense, as it suggests that linked paralogs have been described separately in the annotation. It also suggests, that the genes in the annotation have a representative length.
+\noindent The distribution is near symmetrical, centered around a mean of 1. This observation lead us to conclude that the normalization of coverage might be achievable using the chromosome wide distribution CN instead of the DMD coverage. There is no known prior on the chromosome wide CN distribution. But a mean close to one makes good sense, as it suggests that linked paralogs have been described separately in the annotation. It also suggests, that the genes in the annotation have a length which is representative of the genomes used in this study.
 
-We checked that all individuals obey this distribution (figure \ref{fig:qc_subjects_simliki}), and observed that most individuals do. But, Simliki shows a chromosome wide CN median of 1.64, which suggests that Simliki's DMD gene has a size of $ \frac{100\%}{1.64} = 61\%} $ compared to the reference annotation. Failure to exclude Simliki from subsequent analysis might inflate the CN measurement. Thus, we decided to remove Simliki from subsequent analysis, and hypothesize, that Simliki's DMD gene might have a deletion. All other individuals have a chromosome wide median CN of less than 1.5, and are thus kept in the downstream analysis.??(fjernelse nævnt to gange) ??overvej også at teste forskel på køn med parret permutationstest.
+We checked that all individuals obey this distribution (figure \ref{fig:qc_subjects_simliki}), and observed that most individuals do. But, Simliki shows a chromosome wide CN median of 1.64, which suggests that Simliki's DMD gene has a size of $ \frac{100\%}{1.64} = 61\%} $ compared to the reference annotation. If using DMD for normalization -- failure to exclude Simliki from subsequent analysis might inflate the CN measurement.
 
-Comparing the genes with the highest copy number variation with the results of Lucotte et al
+Thus, we decided to carry out the downstream analysis, normalizing the coverage with the assumption that the distribution of all linked genes should have a mean equal to 1.
+
+%Thus, we decided to remove Simliki from subsequent analysis, and hypothesize, that Simliki's DMD gene might have a deletion. All other individuals have a chromosome wide median CN of less than 1.5, and are thus kept in the downstream analysis.??(fjernelse nævnt to gange) ??overvej også at teste forskel på køn med parret permutationstest.
+
+%Comparing the genes with the highest copy number variation with the results of Lucotte et al
 
 
 
@@ -29,19 +34,21 @@ Comparing the genes with the highest copy number variation with the results of L
 \begin{figure}[h] 
   \centering
   \includegraphics[scale=0.78]{figures/fig_qc_subjects_simliki_1.pdf}
-  \caption{Distribution of median CN across all genes for each subject. Box edges denote quartiles. Points denote values beyond 1.5*IQR, where IQR is the interquartile range.}
+  \caption{Distribution of median CN across all genes for each subject. Coverage normalization is achieved with the coverage of the DMD gene in each individual. Box edges denote quartiles. Points denote values beyond 1.5*IQR, where IQR is the interquartile range.}
   \label{fig:qc_subjects_simliki}
 \end{figure}
 
 
 
 %Some of the genes with the highest median copy numbers are overlapping. This spurred the hypothesis that 
-\noindent Of the 919 genes on the X chromosome, 64 ({\raise.17ex\hbox{$\scriptstyle\sim$}}7\%) have an overlap with another gene. Performing a non-parametric (permutation) test on the difference (in means) of the distributions of medians for overlapping and non-overlapping genes, shows that the difference is not significantly different (\textit{p}-value = 0.1927).
-Two genes, {\footnotesize CT55} and {\footnotesize TCP11x2} are duplicated in full length on the annotation, but since they each have relatively low variances (2nd quartile of overall SD), they are not considered actively ampliconic.
+\noindent Of the 919 genes on the X chromosome, 64 ({\raise.17ex\hbox{$\scriptstyle\sim$}}7\%) have an overlap with another gene. Performing a non-parametric (permutation) test on the difference (in means) of the distributions of medians for overlapping and non-overlapping genes, shows that the difference is not significantly different (\textit{p}-value = 0.1927). This means that the copy number variation in the overlap of two genes does not behave differently than a piece of DNA without overlap.
 
-\subsection*{Checking paralogs on autosomes}
-In this study, we map the reads to the X chromosome only. Because the rest of the chromosomes might contain paralogs of the genes on the X chromosome, it is relevant to check if the exclusion of the rest of the genome has a significant impact on the coverage of the genes on the X chromosome. In order to check this, we randomly picked a number of individuals (?? which) and compared the coverage of the X chromosome genes from this read mapping, to the read mapping of only the X chromosome. ??results
 
+Two genes, {\footnotesize CT55} and {\footnotesize TCP11x2} are duplicated in full length on the annotation, but since they each have relatively low variances (2nd quartile of overall SD), they are not considered actively ampliconic. Nevertheless, the overlap of TCP11x2 and ENSPTRG00000048802 does fall above a median of 2. % TODO flyt længere ned
+
+%\subsection*{Checking paralogs on autosomes}
+%In this study, we map the reads to the X chromosome only. Because the rest of the chromosomes might contain paralogs of the genes on the X chromosome, it is relevant to check if the exclusion of the rest of the genome has a significant impact on the coverage of the genes on the X chromosome. In order to check this, we randomly picked a number of individuals (?? which) and compared the coverage of the X chromosome genes from this read mapping, to the read mapping of only the X chromosome. ??results
+% Jeg tror ikke jeg kan nå at lave denne sammenligning, desværre. Hellere bruge tiden på at lave en lidt bedre intro.
 
 
 
@@ -51,18 +58,52 @@ In this study, we map the reads to the X chromosome only. Because the rest of th
 % Figure 3
 \begin{figure}[h] 
   \centering
-  \includegraphics[scale=0.78]{figures/fig_main_median_3.pdf}
-  \caption{Copy number from all subjects, grouped by genes. These 27 genes or overlaps of genes have a median copy number $\geq$ 1.5. Sorted by descending median. '\&' signifies the overlap of two genes. Horizontal jitter is applied. }
+  \includegraphics[scale=0.78]{figures/fig_main_3.pdf}
+  \caption{Copy number from all subjects, grouped by genes. %These 31 genes or overlaps of genes have a median copy number $\geq$ 1.5. Sorted by descending median. '\&' signifies the overlap of two genes. Horizontal jitter is applied. }
+  These 13 genes or overlaps of genes have a median copy number $\geq$ 2. Sorted by descending standard deviation. '\&' signifies the overlap of two genes. Horizontal jitter is applied. DMD is showed for comparison. }
   \label{fig:fig_main}
 \end{figure}
 
 
-We looked up the genes with the highest median copy numbers. Unfortunately, many of the genes in the Pan\_tro\_3 reference genome are not named as exhaustively as in the human counterparts, and many of the genes thus have serial numbers instead. These serial numbers will be abbreviated as ENSPTRG00000049971 to E..49971. 
-The genes with the highest median copy numbers are enumerated in figure \ref{fig:fig_main}.
-\noindent E..49971, E..42923, E..46688,  E..22234, E..50351, E..49979, E..46615, E..49911, E..47182, E..48376, E..50450, E..49942, POLA1 have no obvious relation to anything meiosis related by name or description, and there is no expression data available. E..22357, XAGE5, E..22336,  is testis expressed but has no other description. E..21637 and OPN1LW have expression in several organs, where testis has the highest. EDA, FGF13 and E..41347 is expressed in several organs as well as the testis. TCP11X2, E..23212, TEX28 are testis expressed but has no other description. For E..48802, no Chimpanzee data is related, but an mRNA of an ortholog in Macaca Fascicularis is testis expressed. SPANXN5 has no expression data, but its description "Sperm protein associated with the nucleus on the X chromosome N1" suggests that it is expressed in the testis. ETDB has an identical homolog which is termed "Embryonic testis differentiation homolog", and thus suggests testis expression. E..52876 and E..16737 have no Chimpanzee expression data, but an ortholog in human with an identity of 90\% is testis expressed. E..28324 is not present in all subjects for unknown reasons. Nevertheless, has a median above 1.5, and is testis expressed.
-\noindent Of the genes described in Lucotte et al. 2019, only {\footnotesize OPN1LW} is overlapping as a copy number-variant gene. Even though it codes for long-wavelength opsin in the retina, it has its highest expression in the testis according to the Bgee database (in Chimpanzee). Of the other genes in deemed copy number-variant Lucotte et al. 2019 - CT47A, presumably orthologous to ENSPTRG00000046894 "cancer/testis antigen 47A" has a max CN of 1.8 and a median CN of 0.9, and is thus not as variant in chimpanzee as in human (max CN: 15.07, median CN: 5.01). The other genes deemed copy number-variant in Lucotte et al. 2019 do not have identically named genes in the Chimpanzee annotation.
-That is, assuming that the naming of the genes across the species is completely parsimonous. An alignment is necessary to be able to conclude that these are in fact orthologs.
-\\
+
+
+Many of the genes with high median copy number show a strong sex-grouping. This might be because the reads from the X degenerate region on the Y chromosome in these males have mapped to its counterpart on the X chromosome. Because the proportion of sexes is not equal amongst subspecies (table \ref{tab:subjects}), we have chosen to not to delve further into this clustering, other than noting that something curious is going on. 
+
+We looked up the 13 genes (figure \ref{fig:fig_main}) with the highest median copy numbers. Unfortunately, many of the genes in the Pan\_tro\_3 reference genome are not named as exhaustively as in the human counterparts which means that many of the genes have serial numbers (ensembl gene ids) instead. These will be abbreviated as ENSPTRG00000049971 to E..49971. 
+
+The gene with the highest median \noindent E..49971 is required for the assembly of the 40S ribosomal subunit \cite{ensembl}. Unfortunately, no expression data is available, neither for orthologs.
+
+E..42923 is a 40S ribosomal protein S2 pseudogene and E..46688 both are very sparsely described \cite{ensembl} and no expression data was possible to find.
+
+E..50351 has very sparse information and no ortholog exists in human. Though a blast search against the human genome identifies a 99\% identical sequence which has expression in many tissues but highest in ovary and testis \cite{ensembl}. 
+
+E..46615 has no description or orthologs.
+
+
+E..22234 "rhox homeobox family member 2" has an ortholog in human: RHOXF2. In human, this gene is expressed in many tissues with the highest levels in testis. It is described as being expressed in early stage germ cells, type-B spermatogonia and early spermatocytes. It has variants that are linked to infertility \cite{10.1093/hmg/ddw313}.
+
+E..21637 is an otherwise uncharacterized gene increasingly expressed in the following organs in order: cerebellum, kidney, prefrontal cortex and testis. In the adult Chimpanzee, this gene is 3 times more expressed in the testis than in any other organ \cite{10.1007/978-3-540-69828-9_12}.
+
+
+
+
+The next region which is an overlap of E..49979 & E..22357 might just be highly copied because it is fundamentally linked to E..49971 which is the gene with the highest copy numbers. Anyway, a look up informs that it is a kidney expressed gene which is otherwise undescribed.
+
+
+% We looked up the 30 genes with the highest median copy numbers. Unfortunately, many of the genes in the Pan\_tro\_3 reference genome are not named as exhaustively as in the human counterparts, and many of the genes thus have serial numbers instead. These serial numbers will be abbreviated as ENSPTRG00000049971 to E..49971. 
+% The genes with the highest median copy numbers are enumerated in figure \ref{fig:fig_main}.
+% \noindent
+% E..49971, E..42923, E..46688,  E..22234, E..50351, E..49979, E..46615, E..49911, E..47182, E..48376, E..50450, E..49942, POLA1
+% have no obvious relation to anything meiosis related by name or description, and there is no expression data available.
+% 
+% E..22357, XAGE5, E..22336,  is testis expressed but has no other description.
+% 
+% E..21637 and OPN1LW have expression in several organs, where testis has the highest.
+% 
+% EDA, FGF13 and E..41347 is expressed in several organs as well as the testis. TCP11X2, E..23212, TEX28 are testis expressed but has no other description. For E..48802, no Chimpanzee data is related, but an mRNA of an ortholog in Macaca Fascicularis is testis expressed. SPANXN5 has no expression data, but its description "Sperm protein associated with the nucleus on the X chromosome N1" suggests that it is expressed in the testis. ETDB has an identical homolog which is termed "Embryonic testis differentiation homolog", and thus suggests testis expression. E..52876 and E..16737 have no Chimpanzee expression data, but an ortholog in human with an identity of 90\% is testis expressed. E..28324 is not present in all subjects for unknown reasons. Nevertheless, has a median above 1.5, and is testis expressed.
+% \noindent Of the genes described in Lucotte et al. 2019, only {\footnotesize OPN1LW} is overlapping as a copy number-variant gene. Even though it codes for long-wavelength opsin in the retina, it has its highest expression in the testis according to the Bgee database (in Chimpanzee). Of the other genes in deemed copy number-variant Lucotte et al. 2019 - CT47A, presumably orthologous to ENSPTRG00000046894 "cancer/testis antigen 47A" has a max CN of 1.8 and a median CN of 0.9, and is thus not as variant in chimpanzee as in human (max CN: 15.07, median CN: 5.01). The other genes deemed copy number-variant in Lucotte et al. 2019 do not have identically named genes in the Chimpanzee annotation.
+% That is, assuming that the naming of the genes across the species is completely parsimonous. An alignment is necessary to be able to conclude that these are in fact orthologs.
+% \\
 
 
 
@@ -80,7 +121,9 @@ That is, assuming that the naming of the genes across the species is completely 
 \\
 \\
 \subsection*{Copy number variation among relatives}
-In order to investigate the copy number turnover between parents-offspring, we plotted the copy number over time measured in n'th degree relatives. For 7 of the 33?? Chimpanzees included in this study, we know the parent relation, and for 3 we know the grandparent relation. This means that we can compare the progression of copy numbers, down through the pedigree. In figure \ref{fig:pedigree_CN}, the copy numbers for the 5 most highly copied genes as well as OPN1LW is visualized. Dad-son relations are removed because no X chromosome is passed in this relation.
+The copy number of a gene in a female individual (XX) is the average of the copy number of the two X chromosomes in its genome. In male individuals (XY), the copy number is the number on the present X chromosome. This means that be investigating the copy number amongst relatives, we can infer the transmission of X chromosomes. Especially in a dad-daughter relation, we know what the copy number of the X chromosome passed to the daughter.
+
+In order to investigate the copy number turnover between parents-offspring, we plotted the copy number over time measured in n'th degree relatives. For 7 of the 33 Chimpanzees included in this study, we know the parent relation, and for 3 we know the grandparent relation. This means that we can compare the progression of copy numbers, down through the pedigree. In figure \ref{fig:pedigree_CN}, the copy numbers for the 5 most highly copied genes as well as OPN1LW is visualized. Dad-son relations are removed because no X chromosome is passed in this relation.
 
 % Figure 4
 \begin{figure}[h] 
