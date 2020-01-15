@@ -3,7 +3,7 @@
 
 
 \subsection*{Overall distribution}
-Normalizing the coverage of each gene with the coverage of the DMD gene, renders the overall distribution of copy numbers, across all genes and individuals, as shown in figure \ref{fig:qc_dist_all}. 
+Normalizing the coverage of each gene with the coverage of the DMD gene, renders the overall distribution of copy numbers, across all genes and individuals, as shown in figure \ref{fig:qc_dist_all}A. 
 
 % Figure 1
 \begin{figure}[h] 
@@ -16,11 +16,11 @@ Normalizing the coverage of each gene with the coverage of the DMD gene, renders
   \label{fig:qc_dist_all}
 \end{figure}
 
-\noindent The distribution is near symmetrical, centered around a mean of 1. This observation lead us to conclude that the normalization of coverage might be achievable using the chromosome wide distribution CN instead of the DMD coverage. There is no known prior on the chromosome wide CN distribution. But a mean close to one makes good sense, as it suggests that linked paralogs have been described separately in the annotation. It also suggests, that the genes in the annotation have a length which is representative of the genomes used in this study.
+\noindent The distribution is near symmetrical, centered around a mean of 0.987. This observation lead us to conclude that the normalization of coverage might be achievable using the chromosome wide distribution CN instead of the DMD coverage. There is no known prior on the chromosome wide CN distribution. But a mean close to one makes good sense, as it suggests that linked paralogs have been described separately in the annotation. It also suggests, that the genes in the annotation have a length which is representative of the genomes used in this study.
 
-We checked that all individuals obey this distribution (figure \ref{fig:qc_subjects_simliki}), and observed that most individuals do. But, Simliki shows a chromosome wide CN median of 1.64, which suggests that Simliki's DMD gene has a size of $ \frac{100\%}{1.64} = 61\%} $ compared to the reference annotation. If using DMD for normalization -- failure to exclude Simliki from subsequent analysis might inflate the CN measurement.
+\noindent We checked that all individuals obey this distribution (figure \ref{fig:qc_subjects_simliki}), and observed that most individuals do. But, Simliki shows a chromosome wide CN median of 1.64, which suggests that Simliki's DMD gene has a size of $ \frac{100\%}{1.64} = 61\%} $ compared to the reference annotation. If using DMD for normalization -- failure to exclude Simliki from subsequent analysis might inflate the CN measurement.
 
-Thus, we decided to carry out the downstream analysis, normalizing the coverage with the assumption that the distribution of all linked genes should have a mean equal to 1.
+\noindent Thus, we decided to carry out the downstream analysis, normalizing the coverage with the assumption that the distribution of all linked genes should have a mean equal to 1. The overall distribution is then as shown in figure \ref{fig:qc_dist_all}B. This assumption carried forward effectively means that the vertical axis in \ref{fig:qc_subjects_simliki} is negatively proportional with the length of the DMD gene in each individual.
 
 %Thus, we decided to remove Simliki from subsequent analysis, and hypothesize, that Simliki's DMD gene might have a deletion. All other individuals have a chromosome wide median CN of less than 1.5, and are thus kept in the downstream analysis.??(fjernelse nævnt to gange) ??overvej også at teste forskel på køn med parret permutationstest.
 
@@ -44,7 +44,6 @@ Thus, we decided to carry out the downstream analysis, normalizing the coverage 
 \noindent Of the 919 genes on the X chromosome, 64 ({\raise.17ex\hbox{$\scriptstyle\sim$}}7\%) have an overlap with another gene. Performing a non-parametric (permutation) test on the difference (in means) of the distributions of medians for overlapping and non-overlapping genes, shows that the difference is not significantly different (\textit{p}-value = 0.1927). This means that the copy number variation in the overlap of two genes does not behave differently than a piece of DNA without overlap.
 
 
-Two genes, {\footnotesize CT55} and {\footnotesize TCP11x2} are duplicated in full length on the annotation, but since they each have relatively low variances (2nd quartile of overall SD), they are not considered actively ampliconic. Nevertheless, the overlap of TCP11x2 and ENSPTRG00000048802 does fall above a median of 2. % TODO flyt længere ned
 
 %\subsection*{Checking paralogs on autosomes}
 %In this study, we map the reads to the X chromosome only. Because the rest of the chromosomes might contain paralogs of the genes on the X chromosome, it is relevant to check if the exclusion of the rest of the genome has a significant impact on the coverage of the genes on the X chromosome. In order to check this, we randomly picked a number of individuals (?? which) and compared the coverage of the X chromosome genes from this read mapping, to the read mapping of only the X chromosome. ??results
@@ -75,19 +74,28 @@ The gene with the highest median \noindent E..49971 is required for the assembly
 
 E..42923 is a 40S ribosomal protein S2 pseudogene and E..46688 both are very sparsely described \cite{ensembl} and no expression data was possible to find.
 
-E..50351 has very sparse information and no ortholog exists in human. Though a blast search against the human genome identifies a 99\% identical sequence which has expression in many tissues but highest in ovary and testis \cite{ensembl}. 
+E..50351 has very sparse information and no ortholog exists in human. A blast search against the human genome identifies a 99\% identical sequence of length $\sim$ 1900 bp which has expression in many tissues but highest in ovary and testis \cite{ensembl}. 
 
-E..46615 has no description or orthologs.
+E..46615 and E..49911 have no description or information about orthologs.
 
 
 E..22234 "rhox homeobox family member 2" has an ortholog in human: RHOXF2. In human, this gene is expressed in many tissues with the highest levels in testis. It is described as being expressed in early stage germ cells, type-B spermatogonia and early spermatocytes. It has variants that are linked to infertility \cite{10.1093/hmg/ddw313}.
 
-E..21637 is an otherwise uncharacterized gene increasingly expressed in the following organs in order: cerebellum, kidney, prefrontal cortex and testis. In the adult Chimpanzee, this gene is 3 times more expressed in the testis than in any other organ \cite{10.1007/978-3-540-69828-9_12}.
+E..21637 is an otherwise uncharacterized gene increasingly expressed in the following organs in order: cerebellum, kidney, prefrontal cortex and testis. In the adult Chimpanzee, this gene is 3 times more expressed in the testis than in any other organ \cite{bgee_}.
 
 
+E..22336 has no description, but is expressed in the heart and mostly in the testis \cite{bgee_}.
+
+
+
+TCP11X2 "t-complex" & E..48802 is an overlap. TCP11X2 is present in Pan\_tro\_3 in two copies (orthologs), which might inflate its copy number. Interestingly the overlap with the gene E..48802 has a higher copy number than the TCP11X2 gene itself. TCP11X2 is not testis expressed \cite{ensembl}, E..48802 is testis expressed.
 
 
 The next region which is an overlap of E..49979 & E..22357 might just be highly copied because it is fundamentally linked to E..49971 which is the gene with the highest copy numbers. Anyway, a look up informs that it is a kidney expressed gene which is otherwise undescribed.
+
+XAGE5 "X antigen fam. 5" is expressed in cerebellum and mostly testis \cite{bgee_}.
+
+
 
 
 % We looked up the 30 genes with the highest median copy numbers. Unfortunately, many of the genes in the Pan\_tro\_3 reference genome are not named as exhaustively as in the human counterparts, and many of the genes thus have serial numbers instead. These serial numbers will be abbreviated as ENSPTRG00000049971 to E..49971. 
@@ -107,9 +115,7 @@ The next region which is an overlap of E..49979 & E..22357 might just be highly 
 
 
 
-\noindent It seems like there is a relation between the high median CN and testis presence. As we don't know what proportion of the X-linked genes are expressed in the testis, it is hard to say if the genes with the highest variation are significantly more present in the testis. Nevertheless, for the genes where expression data was available, all genes but IL1RAPL2 showed signs of presence in the testis.
-
-
+\noindent It seems like there is a relation between the high median CN and testis presence. As we don't know what proportion of the X-linked genes are expressed in the testis, it is hard to say if the genes with the highest variation are significantly more present in the testis. Nevertheless, for the genes where expression data was available, all genes but ?? showed signs of presence in the testis.
 
 
 
