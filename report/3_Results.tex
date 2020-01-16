@@ -50,7 +50,7 @@ Thus, we decided to carry out the downstream analysis, normalizing the coverage 
 
 \subsection*{Most copy number-variant genes}
 
-By measuring the copy number of all genes in all individuals and focusing on the genes with a median above 2, we came up with the list of genes enumerated in figure \ref{fig:fig_main}.
+By measuring the copy number of all genes in all sudjects and focusing on the genes with a median across subjects above 2, we came up with the list of genes enumerated in figure \ref{fig:fig_main}.
 
 % Figure 3
 \begin{figure}[h] 
@@ -62,14 +62,14 @@ By measuring the copy number of all genes in all individuals and focusing on the
 \end{figure}
 
 Many of the genes with high median copy number show a strong grouping between sexes. This might be because the reads from the X degenerate region on the Y chromosome\cite{skaletsklyMSY} in these males have erroneously mapped to its counterpart on the reference X chromosome. 
-As a test, one of the most sexually grouped genes (E..46688) was blast-aligned to the Y chromosome with no matches, which suggests that the sex-grouping is not due to methodological errors. Because the proportion of sexes in each subspecies is varying (table \ref{tab:subjects}), we have chosen to not to delve further into this clustering, other than noting that something curious is going on. 
+As a test, one of the most sexually grouped genes (E..46688) was blast-aligned to the Y chromosome with no matches, which suggests that the sex-grouping is not due to methodological errors. However, because the proportion of sexes in each subspecies is varying (table \ref{tab:subjects}), we have chosen to not to delve further into this clustering, other than noting that something curious is going on. 
 
-We looked up the 13 genes (listed in figure \ref{fig:fig_main}) with the highest SD median copy numbers, where the median was above 2. Unfortunately, many of the genes in the Pan\_tro\_3 reference genome are not named as exhaustively as in the human counterparts which means that many of the genes have serial numbers (ensembl gene ids) instead. These will be abbreviated as ENSPTRG00000049971 to E..49971. 
+We looked up the 13 genes (listed in figure \ref{fig:fig_main}) with the highest SD median copy numbers, where the median is above 2. Unfortunately, many of the genes in the Pan\_tro\_3 reference genome are not named as exhaustively as in the human counterparts which means that many of the genes have serial numbers (ensembl gene ids) instead. These will be abbreviated as ENSPTRG00000049971 to E..49971. 
 
-The genes with the highest median E..49971 and E..42923 are both related to the 40S ribosomal subunit \cite{ensembl}. Unfortunately, no expression data is available, neither for orthologs.
+The genes with the highest median: E..49971 and E..42923 are both related to the 40S ribosomal subunit \cite{ensembl}. Unfortunately, no expression data is available, neither for orthologs.
 
 
-E..50351 has very sparse information and no ortholog exists in human. A blast search against the human genome identifies a 99\% identical sequence of length $\sim$ 1900 bp which has expression in many tissues but highest in ovary and testis \cite{ensembl}. 
+E..50351 has very sparse information and no ortholog exists in human. A blast search against the human genome identifies a 99\% identical sequence of length $\sim$1900 bp which has expression in many tissues but highest in ovary and testis \cite{ensembl}. 
 
 E..46615 and E..49911 have no description or information about orthologs.
 
@@ -79,13 +79,13 @@ E..21637 is an otherwise uncharacterized gene increasingly expressed in the foll
 
 E..22336 has no description, but is expressed in the heart and mostly in the testis \cite{bgee_}.
 
-TCP11X2 "t-complex" & E..48802 is an overlap. TCP11X2 is present in the Pan\_tro\_3 reference genome in two copies (orthologs), which might inflate its copy number. Interestingly the overlap with the gene E..48802 has a higher copy number than the TCP11X2 gene itself. TCP11X2 is not testis expressed \cite{ensembl} but E..48802 is.
+TCP11X2 "t-complex" \& E..48802 is an overlap. TCP11X2 is present in the Pan\_tro\_3 reference genome in two copies (orthologs), which might inflate its copy number. Interestingly the overlap with the gene E..48802 has a higher copy number than the TCP11X2 gene itself. TCP11X2 is not testis expressed \cite{ensembl} but E..48802 is.
 
-The next region which is an overlap of E..49979 & E..22357. A look up informs that it is an otherwise undescribed kidney expressed gene. E..49979 is a "heat shock transcription factor" and E..22357 is an otherwise undescribed gene with expression in kidneys.
+The next region which is an overlap of E..49979 \& E..22357. E..49979 is a "heat shock transcription factor" and E..22357 is an otherwise undescribed gene with expression in kidneys.
 
 XAGE5 "X antigen fam. 5" is expressed in cerebellum and mostly testis \cite{bgee_}.
 
-Overlapping the genes from this study with the ones in Lucotte \textit{et al.} 2018 \cite{Lucotte907} only two genes are present in the top 30 most copy number-variant genes. First one is OPN1LW which codes for long-wavelength opsin in the retina. Nonetheless, it has its highest expression (in Chimpanzee) in the testis\cite{bgee_}. The other gene, CT47A, presumably orthologous to ENSPTRG00000046894 "cancer/testis antigen 47A" has a max CN of 1.8 and a median CN of 0.9, and is thus not as variant in chimpanzee as in human (max CN: 15.07, median CN: 5.01). The other genes deemed copy number-variant in Lucotte et al. 2019 do not have identically named genes in the Chimpanzee annotation.
+Overlapping the genes from this study with the ones in Lucotte \textit{et al.} 2018 \cite{Lucotte907}, only two genes are present in the top 30 most copy number-variant genes. The first one is OPN1LW which codes for long-wavelength opsin in the retina. Nonetheless, it has its highest expression (in Chimpanzee) in the testis\cite{bgee_}. The other gene, CT47A, presumably orthologous to ENSPTRG00000046894 "cancer/testis antigen 47A" has a max CN of 1.8 and a median CN of 0.9, and is thus not as variant in chimpanzee as in human (human max CN: 15.07, human median CN: 5.01). The other genes deemed copy number-variant in Lucotte \textit{et al.} 2019\cite{Lucotte907} do not have identically named genes in the Chimpanzee annotation.
 
 
 % We looked up the 30 genes with the highest median copy numbers. Unfortunately, many of the genes in the Pan\_tro\_3 reference genome are not named as exhaustively as in the human counterparts, and many of the genes thus have serial numbers instead. These serial numbers will be abbreviated as ENSPTRG00000049971 to E..49971. 
@@ -104,13 +104,11 @@ Overlapping the genes from this study with the ones in Lucotte \textit{et al.} 2
 % \\
 
 
-\noindent It seems like there is a relation between the high median CN and testis presence. As we don't know what proportion of the X-linked genes are expressed in the testis, it is hard to say if the genes with the highest variation are significantly more present in the testis. Nevertheless, for the genes where expression data was available, all genes but E..22357 showed signs of presence in the testis.
+\noindent It seems like there is a relation between the high median CN and testis presence. As we don't know what proportion of the X-linked genes are expressed in the testis, it is hard to say if the genes with the highest variation are significantly more present in the testis. Nevertheless, for the genes where expression data was available, all genes but E..22357 showed signs of presence in the testis. More genes with high copy number variation but lower standard deviations than the previously discussed can be found in table \ref{tab:genes}.
 
 
-\\
-\\
 \subsection*{Copy number variation among relatives}
-The copy number of a gene in a female individual (XX) is the average of the copy number of the two X chromosomes present in its genome. In male individuals (XY), the copy number is the number on the present X chromosome. This means that be investigating the copy number amongst relatives, we can infer the probable transmission of X chromosomes. Especially in a dad-daughter relation, we know what the copy number of the X chromosome passed to the daughter.
+The copy number of a gene in a female individual (XX) is the average of the copy number of the two X chromosomes present in its genome. In male individuals (XY), the copy number is the number on the lone X chromosome. This means that by investigating the copy number amongst relatives, we can infer the probable transmission of X chromosomes. Especially in a dad-daughter relation, we know that the copy number of the X chromosome is passed to the daughter. When this daughter then has many sons, it is possible to infer the copy number variation which has occurred meanwhile.
 
 In order to investigate the copy number turnover between parents and offspring, we plotted the copy number over time measured in generations. For 7 of the 33 Chimpanzees included in this study, we know the parent relation, and for 3 we know the grandparent relation. This means that we can compare the progression of copy numbers, down through 2 generations. In figure \ref{fig:pedigree_CN}, the copy numbers for the 6 most highly copied genes is visualized. Dad-son relations are removed because no X chromosome is passed in this relation.
 
@@ -122,11 +120,11 @@ In order to investigate the copy number turnover between parents and offspring, 
   \label{fig:pedigree_CN}
 \end{figure}
 
-Because the sample size of each parent-offspring event is limited, it is impossible to conclude anything on the copy number variation between generations. For E..49971 there is a parents-daughter relation from generation 0 to 1. Because the daughter has one X from her dad (copy number = 4.3) and one copy from her mom (either copy number = 6 or copy number = 1, as evident from her other sons where the dad is not known and not relevant). Nonetheless, this daughter has three sons with copy numbers = 4.3, 4.9 and 5.1 respectively. It is implicitly given that the X chromosomes in these three sons are the same, and the amount of variation in these sons show that the copy number variation in this gene is not stagnant.
+Because the sample size of each parent-offspring event is limited, it is impossible to conclude anything on the copy number variation between the generations. Anyhow, For E..49971 there is a parents-daughter relation from generation 0 to 1. Because the daughter has one X from her dad (copy number = 4.3) and one copy from her mom (either copy number = 6 or copy number = 1, as evident from her other sons where the dad is not known and not relevant). Nonetheless, this daughter has three sons with copy numbers = 4.3, 4.9 and 5.1 respectively. It is implicitly given that the X chromosomes in these three sons are the same, and the amount of variation in these sons show that the copy number variation in this gene is not stagnant.
 
 
 
 
 %For E..49971 there is a parents-daughter trio from 0'th to 1'st generation. The mom in this relation also has a son with a high (copy number = 6), which means that this mom will need to have another X chromosome with a copy number correspondingly low around the average of $\sim$3. Because the daughter in the previously mentioned trio repræsents the average of the father (copy number = 4.3) and mom (copy number either 
 
-A similar line of thought can be applied to some of the other genes, implicating that the copy number can vary somewhat between generations. This is of course, assuming that the measurements are robust and not due to random fluctuations introduced method errors.
+A similar line of thought can be applied to some of the other genes, implying that the copy number can vary somewhat between generations. This is of course, assuming that the measurements are robust and not due to random fluctuations introduced by methodological errors.
