@@ -1,2 +1,2 @@
-(report)[https://github.com/cmkobel/ChimpX/raw/master/report/ChimpX.pdf]
+[report](https://github.com/cmkobel/ChimpX/raw/master/report/ChimpX.pdf)
 
