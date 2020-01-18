@@ -1,2 +1,2 @@
-See the [report](https://github.com/cmkobel/ChimpX/raw/master/report/ChimpX.pdf).
+See the [report](https://github.com/cmkobel/ChimpX/blob/master/report/ChimpX.pdf).
 
