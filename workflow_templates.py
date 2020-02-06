@@ -11,9 +11,9 @@ import os
 def initialize(title, description): # lav den her funktion i python i stedet for.
     inputs = []
     outputs = [title + "/batch_description.txt"] # Jeg forstår ikke hvornår den her fil bliver lavet?
-    options = {'cores': 1, 'memory': 100, 'walltime': '00:01:00'}
+    options = {'cores': 1, 'memory': '1g', 'walltime': '00:01:00', 'account': "simons"}
     spec = '''
-        mkdir {title}
+        mkdir -p {title}
         cd {title}
         echo $(date)'\n{description}\n' >> batch_description.txt
         mj > mj.txt'''.format(
@@ -28,7 +28,9 @@ def index_genome(title, refgenome):
     
     inputs = [refgenome]
     outputs = [title+'/'+refgenome_stem+extension for extension in ['.amb', '.ann', '.pac', '.sa', '.bwt', '.fa']]
-    options = {'cores': 1, 'memory': 2000, 'walltime': '00:25:00', 'account': "simons"}
+    #options = {'cores': 1, 'memory': 2000, 'walltime': '00:25:00', 'account': "simons"}
+    options = {'cores': 1, 'memory': '10g', 'walltime': '10:00:00', 'account': "simons"}
+    
     #options = {}
     spec =  """sleep 1; cd {title}; cp ../{refgenome} .
 
@@ -74,7 +76,8 @@ def bwa_map_pe(title, refgenome, read1, read2, subject):
         '_sort_dedup.bam.bai',
         '_sort_dedup.bam.flagstat']]
 
-    options = {'cores': 16, 'memory': 16000, 'walltime': '24:00:00', 'account': "simons"} # changed memory to 16, # back to 12, and with double time (24h)
+    #options = {'cores': 16, 'memory': 16000, 'walltime': '24:00:00', 'account': "simons"} # changed memory to 16, # back to 12, and with double time (24h)
+    options = {'cores': 16, 'memory': 64000, 'walltime': '120:00:00', 'account': "simons"} # changed memory to 16, # back to 12, and with double time (24h)
     spec = '''
         #source /com/extra/bwa/0.7.5a/load.sh
         #source /com/extra/sambamba/0.5.1/load.sh
@@ -88,7 +91,8 @@ def bwa_map_pe(title, refgenome, read1, read2, subject):
         sleep 10
 
         #rm -f {ind}_unsorted.bam
-        sambamba markdup -t 16 {ind}_sorted.bam --tmpdir=/scratch/$GWF_JOBID/ {ind}_sort_dedup.bam
+        # I'm trying to use a different sambamba for the mardup stage, as the conda 0.7.0 install gives a segmentation fault.
+        /home/cmkobel/software/sambamba71/sambamba-0.7.1-linux-static markdup -t 16 {ind}_sorted.bam --tmpdir=/scratch/$GWF_JOBID/ {ind}_sort_dedup.bam
         sleep 10
 
         #rm -f {ind}_sorted.bam
@@ -165,8 +169,22 @@ def filter_bam_file(title, individual):
     spec = '''
         cd {title}
         #source /com/extra/sambamba/0.5.1/load.sh
+
+        # original
         sambamba view -F "not (duplicate or secondary_alignment or unmapped) and mapping_quality >= 50 and cigar =~ /100M/ and [NM] < 3" -f bam {ind}/{ind}_merged.bam > {ind}/{ind}_filtered.bam
+
+	# different tries
+        #sambamba view -F "mapping_quality >= 50 and cigar =~ /100M/ and [NM] < 3" -f bam {ind}/{ind}_merged.bam > {ind}/{ind}_filtered.bam #0
+        #sambamba view -F "cigar =~ /100M/ and [NM] < 3" -f bam {ind}/{ind}_merged.bam > {ind}/{ind}_filtered.bam #0
+        
+        #sambamba view -F "not (duplicate or secondary_alignment or unmapped)" -f bam {ind}/{ind}_merged.bam > {ind}/{ind}_filtered.bam # this gave 2GB coverage
+        
+
+
+
+
         sambamba index ./{ind}/{ind}_filtered.bam 
+
         #rm -f {ind}_merged.bam'''.format(title=title, ind=individual)
     #print(spec)
     return inputs, outputs, options, spec
@@ -197,8 +215,8 @@ def get_coverage(title, individual):
 
 # 6:
 def get_cnv(title, individual, chrom):
-    pass
-    """
+    
+    
     inputs = [title+'/'+individual+'/'+individual+'_cov.txt']
     #ooutputs = [inputs[0]+'_pd_median.txt']
     outputs = [title+'/cn_medians/'+chrom+'_'+individual+'_cn_median.csv']
@@ -208,4 +226,4 @@ def get_cnv(title, individual, chrom):
     ~/miniconda3/bin/python compute_cov_median.py {input} {output}
     '''.format(dir = title+'/cn_medians/', input = inputs[0], output = outputs[0])
     return inputs, outputs, options, spec
-    #fejl ved manglende fil? fordi den ligge en aterproccessing."""
+    #fejl ved manglende fil? fordi den ligge en aterproccessing.

@@ -28,7 +28,11 @@ import pandas as pd
 
 
 # Define the root gwf object
-gwf = Workflow()
+
+gwf = Workflow(defaults={
+    "mail_user": "kobel@pm.me",
+    "mail_type": "FAIL",
+})
 
 
 def get_individuals(path):
@@ -96,11 +100,11 @@ batches = [{"title": "batch_x6_chimp",
 """    
 
 batch = {
-    "prefix": "X_L",
+    "prefix": "X_N",
     
-    "rel_ac": "pan_tro_3_X.fa",
+    "rel_ac": "pt3_full_Xrest.fa", 
     "rel_subjects": "subjects/subjects.tsv",
-    "description": "pantro3 complete X chromosome. Starting out with Carolina only."
+    "description": "pantro3 complete genome. Using conda"
 }
 
 subjects = pd.read_csv(batch['rel_subjects'], delimiter = '\t')
@@ -129,7 +133,12 @@ gwf.target_from_template(batch['prefix'] + '_1_index', index_genome(batch['prefi
 
 
 for _row, row in subjects.iterrows(): # for each subject
+    
     subject = row['given_name']
+    
+    #if subject != "Banyo":
+    #    continue
+    
     print('\n' + subject)
 
     with open(f'subjects/runs/{row["given_name"]}.txt', 'r') as runs_file:
@@ -170,8 +179,8 @@ for _row, row in subjects.iterrows(): # for each subject
                                           subject))
 
     # 6: Calculate CNV
-    #gwf.target_from_template(batch['prefix'] + '_6_calc_cnv' + subject.replace('-', '_'), get_cnv(batch['prefix'],
-    #                                                                                              subject,
-    #                                                                                              'X'))
+    gwf.target_from_template(batch['prefix'] + '_6_calc_cnv' + subject.replace('-', '_'), get_cnv(batch['prefix'],
+                                                                                                  subject,
+                                                                                                  'X'))
     #break # debug for only first subject (Carolina)
 
